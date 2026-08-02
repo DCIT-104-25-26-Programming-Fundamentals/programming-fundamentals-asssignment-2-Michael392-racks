@@ -51,3 +51,93 @@
 #include <iostream>
 using namespace std;
 
+#include <iostream>
+using namespace std;
+
+
+void printFibonacci(int n) {
+    if (n <= 0) {
+        cout << "Error: Number of terms must be greater than 0." << endl;
+        return;
+    }
+
+    cout << "Fibonacci sequence: ";
+    
+    long long first = 0, second = 1;
+
+    for (int i = 0; i < n; i++) {
+        if (i == 0) {
+            cout << first;
+        } else if (i == 1) {
+            cout << " " << second;
+        } else {
+            long long next = first + second;
+            cout << " " << next;
+            first = second;
+            second = next;
+        }
+    }
+    cout << endl;
+}
+
+
+bool isFibonacci(long long target) {
+    
+    if (target < 0) {
+        return false;
+    }
+
+    
+    if (target == 0 || target == 1) {
+        return true;
+    }
+
+    long long first = 0, second = 1;
+    long long next = first + second;
+
+    
+    while (next < target) {
+        first = second;
+        second = next;
+        next = first + second;
+    }
+
+    
+    return (next == target);
+}
+
+int main() {
+    int choice;
+    cout << "============================================" << endl;
+    cout << "         FIBONACCI PROGRAM MENU             " << endl;
+    cout << "============================================" << endl;
+    cout << "1. Print first N terms (Part A)" << endl;
+    cout << "2. Check if a number is Fibonacci (Part B)" << endl;
+    cout << "Enter your choice (1 or 2): ";
+    cin >> choice;
+
+    if (choice == 1) {
+        
+        int terms;
+        cout << "How many terms? ";
+        cin >> terms;
+        printFibonacci(terms);
+
+    } else if (choice == 2) {
+        
+        long long num;
+        cout << "Enter a number to check: ";
+        cin >> num;
+
+        if (isFibonacci(num)) {
+            cout << num << " is a Fibonacci number." << endl;
+        } else {
+            cout << num << " is NOT a Fibonacci number." << endl;
+        }
+
+    } else {
+        cout << "Invalid choice. Program terminating." << endl;
+    }
+
+    return 0;
+}
